@@ -5,22 +5,22 @@ public class Department {
     public String depName;
     public double depSalary;
 
-    public Department() {
-        super();
-    }
+    // public Department() {
+    //     super();
+    // }
 
-    public Department(String depID, String depName, double depSalary) {
-        this.depID = depID;
-        this.depName = depName;
-        this.depSalary = depSalary;
-    }
+    // public Department(String depID, String depName, double depSalary) {
+    //     this.depID = depID;
+    //     this.depName = depName;
+    //     this.depSalary = depSalary;
+    // }
 
     public String getDepID() {
         return depID;
     }
 
-    public void setDepID(String depID) {
-        this.depID = depID;
+    public void setDepID(String A) {
+        depID = A;
     }
 
     public String getDepName() {

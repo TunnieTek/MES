@@ -5,117 +5,96 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class EmployeeManage implements Action 
+public class EmployeeManage implements Action<Employee> 
 {
-        @Override
-        public Employee add() {
-            Scanner sc = new Scanner(System.in);
-            Employee emp = new Employee();
-            System.out.println("Enter Employee ID: ");
-            emp.setEmpID(sc.nextLine());
-            System.out.println("Enter Employee Name: ");
-            emp.setEmpName(sc.nextLine());
-            System.out.println("Enter Employee Email: ");
-            emp.setEmpEmail(sc.nextLine());
-            System.out.println("Enter Employee Working Hours: ");
-            emp.setWorkingHours(sc.nextDouble());
-            // System.out.println("Enter Employee Department ID: ");
-            // emp.setDep(sc.nextLine());
-            // System.out.println("Enter Employee Position ID: ");
-            // emp.setPos(sc.nextLine());
-            return new Employee();
-        }
-    
-        @Override
-        public boolean edit(ArrayList<Object> list) {
-            System.out.println("Enter Employee ID: ");
-            Scanner sc = new Scanner(System.in);
-            String empID = sc.nextLine();
-            for (int i = 0; i < list.size(); i++) {
-                if (empID.equals(((Employee) list.get(i)).getEmpID())) {
-                    System.out.println("Enter Employee Name: ");
-                    ((Employee) list.get(i)).setEmpName(sc.nextLine());
-                    System.out.println("Enter Employee Email: ");
-                    ((Employee) list.get(i)).setEmpEmail(sc.nextLine());
-                    System.out.println("Enter Employee Working Hours: ");
-                    ((Employee) list.get(i)).setWorkingHours(sc.nextDouble());
-                    System.out.println("Enter Employee Department ID: ");
-                    ((Employee) list.get(i)).getDep().setDepID(sc.nextLine());
-                    System.out.println("Enter Employee Position ID: ");
-                    ((Employee) list.get(i)).getPos().setPosID(sc.nextLine());
-                    return true;
-                }
-            }
-            return false;
-        }
-    
-        @Override
-        public boolean delete(ArrayList<Object> list) {
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter Employee ID: ");
-            String empID = sc.nextLine();
-            for (int i = 0; i < list.size(); i++) {
-                if (empID.equals(((Employee) list.get(i)).getEmpID())) {
-                    list.remove(i);
-                    return true;
-                }
-            }
-            return false;
-        }
-    
-        @Override
-        public void show(ArrayList<Object> list) {
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println("Employee ID: " + ((Employee) list.get(i)).getEmpID());
-                System.out.println("Employee Name: " + ((Employee) list.get(i)).getEmpName());
-                System.out.println("Employee Email: " + ((Employee) list.get(i)).getEmpEmail());
-                System.out.println("Employee Working Hours: " + ((Employee) list.get(i)).getWorkingHours());
-                System.out.println("Employee Department ID: " + ((Employee) list.get(i)).getDep().getDepID());
-                System.out.println("Employee Position ID: " + ((Employee) list.get(i)).getPos().getPosID());
+
+    @Override
+    public Employee add() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Employee ID: ");
+        String empID = sc.nextLine();
+        System.out.println("Enter Employee Name: ");
+        String empName = sc.nextLine();
+        System.out.println("Enter Employee Email: ");
+        String empEmail = sc.nextLine();
+        System.out.println("Enter Employee Working Hours: ");
+        Double workingHours = sc.nextDouble();
+        System.out.println("Enter Employee Department: ");
+        Department dep = new DepartmentManage().add();
+        System.out.println("Enter Employee Position: ");
+        Position pos = new PositionManage().add();
+        return new Employee(empID, empName, empEmail, workingHours, dep, pos);
+
+    }
+
+    @Override
+    public boolean edit(ArrayList<Employee> list) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Employee ID: ");
+        String empID = sc.nextLine();
+        for (Employee e : list) {
+            if (e.getEmpID().equals(empID)) {
+                System.out.println("Enter new Employee Name: ");
+                String empName = sc.nextLine();
+                System.out.println("Enter new Employee Email: ");
+                String empEmail = sc.nextLine();
+                System.out.println("Enter new Employee Working Hours: ");
+                Double workingHours = sc.nextDouble();
+                System.out.println("Enter new Employee Department: ");
+                Department dep = new DepartmentManage().add();
+                System.out.println("Enter new Employee Position: ");
+                Position pos = new PositionManage().add();
+                e.setEmpName(empName);
+                e.setEmpEmail(empEmail);
+                e.setWorkingHours(workingHours);
+                e.setDep(dep);
+                e.setPos(pos);
+                return true;
             }
         }
-    
-        @Override
-        public void search(ArrayList<Object> list) {
-            System.out.println("Enter Employee ID: ");
-            Scanner sc = new Scanner(System.in);
-            String empID = sc.nextLine();
-            for (int i = 0; i < list.size(); i++) {
-                if (empID.equals(((Employee) list.get(i)).getEmpID())) {
-                    System.out.println("Employee ID: " + ((Employee) list.get(i)).getEmpID());
-                    System.out.println("Employee Name: " + ((Employee) list.get(i)).getEmpName());
-                    System.out.println("Employee Email: " + ((Employee) list.get(i)).getEmpEmail());
-                    System.out.println("Employee Working Hours: " + ((Employee) list.get(i)).getWorkingHours());
-                    System.out.println("Employee Department ID: " + ((Employee) list.get(i)).getDep().getDepID());
-                    System.out.println("Employee Position ID: " + ((Employee) list.get(i)).getPos().getPosID());
-                }
+        return false;
+    }
+
+    @Override
+    public boolean delete(ArrayList<Employee> list) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Employee ID: ");
+        String empID = sc.nextLine();
+        for (Employee e : list) {
+            if (e.getEmpID().equals(empID)) {
+                list.remove(e);
+                return true;
             }
         }
-    
-        @Override
-        public void sort(ArrayList<Object> list) {
-            for (int i = 0; i < list.size() - 1; i++) {
-                for (int j = i + 1; j < list.size(); j++) {
-                    if (((Employee) list.get(i)).getEmpID().compareTo(((Employee) list.get(j)).getEmpID()) > 0) {
-                        Employee temp = (Employee) list.get(i);
-                        list.set(i, list.get(j));
-                        list.set(j, temp);
-                    }
-                }
+        return false;
+    }
+
+    @Override
+    public void show(ArrayList<Employee> list) {
+        for (Employee e : list) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void search(ArrayList<Employee> list) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Employee ID: ");
+        String empID = sc.nextLine();
+        for (Employee e : list) {
+            if (e.getEmpID().equals(empID)) {
+                System.out.println(e);
             }
         }
+    }
+
+    @Override
+    public void sort(ArrayList<Employee> list) {
+        list.sort((Employee e1, Employee e2) -> e1.getEmpID().compareTo(e2.getEmpID()));
     
-        @Override
-        public void print(ArrayList<Object> list) {
-            for (int i = 0; i < list.size(); i++) {
-                System.out.println("Employee ID: " + ((Employee) list.get(i)).getEmpID());
-                System.out.println("Employee Name: " + ((Employee) list.get(i)).getEmpName());
-                System.out.println("Employee Email: " + ((Employee) list.get(i)).getEmpEmail());
-                System.out.println("Employee Working Hours: " + ((Employee) list.get(i)).getWorkingHours());
-                System.out.println("Employee Department ID: " + ((Employee) list.get(i)).getDep().getDepID());
-                System.out.println("Employee Position ID: " + ((Employee) list.get(i)).getPos().getPosID());
-            }
-        }
+    }
+    
+
 }
 
 

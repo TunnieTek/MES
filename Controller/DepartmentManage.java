@@ -5,46 +5,56 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class DepartmentManage implements Action  
+public class DepartmentManage implements Action<Department>  
 {
 
     @Override
     public Department add() {
-        Scanner sc = new Scanner(System.in);
         Department dep = new Department();
-        System.out.println("Enter Department ID: ");
-        dep.setDepID(sc.nextLine());    
-        System.out.println("Enter Department Name: ");
-        dep.setDepName(sc.nextLine());
-        System.out.println("Enter Department Salary: ");
-        dep.setDepSalary(sc.nextDouble());
-        return new Department();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter department ID: ");
+        String depID = sc.nextLine();
+        dep.setDepID(depID);
+        System.out.println("Enter department name: ");
+        String depName = sc.nextLine();
+        dep.setDepName(depName);
+        System.out.println("Enter department salary: ");
+        Double depSalary = sc.nextDouble();
+        dep.setDepSalary(depSalary);
+        return dep;
     }
 
     @Override
-    public boolean edit(ArrayList<Object> list) {
+    public boolean edit(ArrayList<Department> list) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Department ID: ");
+        System.out.println("Enter department ID: ");
         String depID = sc.nextLine();
-        for (int i = 0; i < list.size(); i++) {
-            if (depID.equals(((Department) list.get(i)).getDepID())) {
-                System.out.println("Enter Department Name: ");
-                ((Department) list.get(i)).setDepName(sc.nextLine());
-                System.out.println("Enter Department Salary: ");
-                ((Department) list.get(i)).setDepSalary(sc.nextDouble());
+        for(int i=0; i<list.size(); i++)
+        {
+            if(list.get(i).getDepID().equals(depID))
+            {
+                System.out.println("Enter department name: ");
+                String depName = sc.nextLine();
+                System.out.println("Enter department salary: ");
+                Double depSalary = sc.nextDouble();
+                list.get(i).setDepName(depName);
+                list.get(i).setDepSalary(depSalary);
                 return true;
             }
         }
+        System.out.println("Not found!");
         return false;
     }
 
     @Override
-    public boolean delete(ArrayList<Object> list) {
+    public boolean delete(ArrayList<Department> list) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Department ID: ");
+        System.out.println("Enter department ID: ");
         String depID = sc.nextLine();
-        for (int i = 0; i < list.size(); i++) {
-            if (depID.equals(((Department) list.get(i)).getDepID())) {
+       for(int i=0; i<list.size(); i++)
+        {
+            if(list.get(i).getDepID().equals(depID))
+            {
                 list.remove(i);
                 return true;
             }
@@ -53,34 +63,37 @@ public class DepartmentManage implements Action
     }
 
     @Override
-    public void show(ArrayList<Object> list) {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("Department ID: " + ((Department) list.get(i)).getDepID());
-            System.out.println("Department Name: " + ((Department) list.get(i)).getDepName());
-            System.out.println("Department Salary: " + ((Department) list.get(i)).getDepSalary());
+    public void show(ArrayList<Department> list) {
+        System.out.println("|\t\tDepartment ID\t\t|\t\tDepartment Name\t\t|\t\tDepartment Salary\t\t|");        
+        for(int i=0; i<list.size(); i++)
+        {
+            // System.out.println(list.get(i).getDepID() + " - " + list.get(i).getDepName() + " - " + list.get(i).getDepSalary());
         }
+            System.out.println(list.get(0).getDepID() + " - " + list.get(0).getDepName() + " - " + list.get(0).getDepSalary());
+
     }
 
     @Override
-    public void search(ArrayList<Object> list) {
+    public void search(ArrayList<Department> list) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Department ID: ");
+        System.out.println("Enter department ID: ");
         String depID = sc.nextLine();
-        for (int i = 0; i < list.size(); i++) {
-            if (depID.equals(((Department) list.get(i)).getDepID())) {
-                System.out.println("Department ID: " + ((Department) list.get(i)).getDepID());
-                System.out.println("Department Name: " + ((Department) list.get(i)).getDepName());
-                System.out.println("Department Salary: " + ((Department) list.get(i)).getDepSalary());
+        for(int i=0; i<list.size(); i++)
+        {
+            if(list.get(i).getDepID().equals(depID))
+            {
+                System.out.println(list.get(i).toString());
+                return;
             }
         }
     }
 
     @Override
-    public void sort(ArrayList<Object> list) {
+    public void sort(ArrayList<Department> list) {
         for (int i = 0; i < list.size() - 1; i++) {
             for (int j = i + 1; j < list.size(); j++) {
-                if (((Department) list.get(i)).getDepSalary() > ((Department) list.get(j)).getDepSalary()) {
-                    Department temp = (Department) list.get(i);
+                if (list.get(i).getDepSalary() > list.get(j).getDepSalary()) {
+                    Department temp = list.get(i);
                     list.set(i, list.get(j));
                     list.set(j, temp);
                 }
@@ -88,14 +101,6 @@ public class DepartmentManage implements Action
         }
     }
 
-    @Override
-    public void print(ArrayList<Object> list) {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("Department ID: " + ((Department) list.get(i)).getDepID());
-            System.out.println("Department Name: " + ((Department) list.get(i)).getDepName());
-            System.out.println("Department Salary: " + ((Department) list.get(i)).getDepSalary());
-        }
-    }
     
 }
 

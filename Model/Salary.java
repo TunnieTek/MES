@@ -14,6 +14,22 @@ public class Salary {
         this.totalSalary = totalSalary;
     }
 
+    public void setSalaryID(String salaryID) {
+        this.salaryID = salaryID;
+    }
+
+    public String getSalaryID() {
+        return salaryID;
+    }
+
+    public Employee getEmp() {
+        return emp;
+    }
+
+    public void setEmp(Employee emp) {
+        this.emp = emp;
+    }
+
     public Double setTotalSalary(Employee emp) {
         double totalSalary = 0;
         totalSalary = emp.getWorkingHours() * emp.getDep().getDepSalary() + emp.getPos().getPosBonus();
