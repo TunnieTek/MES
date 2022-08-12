@@ -19,8 +19,8 @@ public class Department {
         return depID;
     }
 
-    public void setDepID(String A) {
-        depID = A;
+    public void setDepID(String depID) {
+        this.depID = depID;
     }
 
     public String getDepName() {

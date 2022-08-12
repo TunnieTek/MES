@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class DepartmentManage implements Action<Department>  
 {
-
     @Override
     public Department add() {
         Department dep = new Department();
@@ -51,12 +50,21 @@ public class DepartmentManage implements Action<Department>
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter department ID: ");
         String depID = sc.nextLine();
-       for(int i=0; i<list.size(); i++)
+        for(int i=0; i<list.size(); i++)
         {
             if(list.get(i).getDepID().equals(depID))
             {
-                list.remove(i);
-                return true;
+                System.out.println("Do you want to delete this department? (Y/N)");
+                String choice = sc.nextLine();
+                if(choice.equals("Y"))
+                {
+                    list.remove(i);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
         return false;
@@ -64,12 +72,19 @@ public class DepartmentManage implements Action<Department>
 
     @Override
     public void show(ArrayList<Department> list) {
-        System.out.println("|\t\tDepartment ID\t\t|\t\tDepartment Name\t\t|\t\tDepartment Salary\t\t|");        
-        for(int i=0; i<list.size(); i++)
+        System.out.printf("|%-10s|%-20s|%-20s|%n", "ID", "Name", "Salary");        
+        if(list.size() == 0)
         {
-            // System.out.println(list.get(i).getDepID() + " - " + list.get(i).getDepName() + " - " + list.get(i).getDepSalary());
+            System.out.println("Empty!");
         }
-            System.out.println(list.get(0).getDepID() + " - " + list.get(0).getDepName() + " - " + list.get(0).getDepSalary());
+        else
+        {
+            for(int i=0; i<list.size(); i++)
+            {
+                // System.out.println("|\t"+list.get(i).getDepID()+"\t\t|\t\t"+list.get(i).getDepName()+"\t\t|\t\t"+list.get(i).getDepSalary()+"\t\t|");
+                System.out.printf("|%-10s|%-20s|%-20s|%n", list.get(i).getDepID(), list.get(i).getDepName(), list.get(i).getDepSalary());
+            }
+        }
 
     }
 
@@ -82,7 +97,8 @@ public class DepartmentManage implements Action<Department>
         {
             if(list.get(i).getDepID().equals(depID))
             {
-                System.out.println(list.get(i).toString());
+                System.out.printf("|%-10s|%-20s|%-20s|%n", "ID", "Name", "Salary");        
+                System.out.printf("|%-10s|%-20s|%-20s|%n", list.get(i).getDepID(), list.get(i).getDepName(), list.get(i).getDepSalary());
                 return;
             }
         }
@@ -90,15 +106,22 @@ public class DepartmentManage implements Action<Department>
 
     @Override
     public void sort(ArrayList<Department> list) {
-        for (int i = 0; i < list.size() - 1; i++) {
-            for (int j = i + 1; j < list.size(); j++) {
-                if (list.get(i).getDepSalary() > list.get(j).getDepSalary()) {
+        for(int i=0; i<list.size()-1; i++)
+        {
+            for(int j=i+1; j<list.size(); j++)
+            {
+                if(list.get(i).getDepSalary() > list.get(j).getDepSalary())
+                {
                     Department temp = list.get(i);
                     list.set(i, list.get(j));
                     list.set(j, temp);
                 }
             }
         }
+    }
+
+    public ArrayList<Department> getList() {
+        return null;
     }
 
     

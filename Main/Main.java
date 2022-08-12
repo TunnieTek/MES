@@ -11,6 +11,14 @@ public class Main
 {
     public static void main(String[] args) {
         System.out.println("Management Employee System");
+        ArrayList<Department> depList = new ArrayList<Department>();
+        DepartmentManage depManage = new DepartmentManage();
+        ArrayList<Employee> empList = new ArrayList<Employee>();
+        EmployeeManage empManage = new EmployeeManage();
+        ArrayList<Position> posList = new ArrayList<Position>();
+        PositionManage posManage = new PositionManage();
+        ArrayList<Salary> salList = new ArrayList<Salary>();
+        SalaryManage salManage = new SalaryManage();
         while (true) 
         {
             System.out.println("==========================================================");
@@ -30,7 +38,9 @@ public class Main
             int choose = sc.nextInt();
             switch(choose)
             {
+
                 case 1:
+                    boolean check = true;
                     int depChoose = 0;
                     while (true)
                     {
@@ -47,8 +57,6 @@ public class Main
                         System.out.println("||                                                 ||");
                         System.out.println("=====================================================");
                         depChoose = sc.nextInt();
-                        ArrayList<Department> depList = new ArrayList<Department>();
-                        DepartmentManage depManage = new DepartmentManage();
                         switch(depChoose)
                         {
                             case 1:
@@ -70,13 +78,19 @@ public class Main
                                 depManage.sort(depList);
                                 break;
                             case 7:
+                                check = false;
                                 break;
                             default:
                                 System.out.println("Please choose again!");
                                 break;
                         }
-                    }
+                        if(check == false)
+                        {
+                            break;
+                        }
+                    } break;
                 case 2:
+                boolean check2 = true;
                     int posChoose = 0;
                     while (true)
                     {
@@ -96,102 +110,139 @@ public class Main
                         switch(posChoose)
                         {
                             case 1:
+                                posList.add(posManage.add());
                                 break;
                             case 2:
+                                posManage.edit(posList);    
                                 break;
                             case 3:
+                                posManage.delete(posList);
                                 break;
                             case 4:
+                                posManage.show(posList);
                                 break;
                             case 5:
+                                posManage.search(posList);
                                 break;
                             case 6:
+                                posManage.sort(posList);
                                 break;
                             case 7:
+                                check2 = false;
                                 break;
                             default:
                                 System.out.println("Please choose again!");
                                 break;
                         }
+                        if(check2 == false)
+                        {
+                            break;
+                        }
                     }
+                    break;
                 case 3:
-                int empChoose = 0;
-                while (true)
-                {
-                    System.out.println("=====================================================");
-                    System.out.println("||                                                 ||");
-                    System.out.println("||            Employee Management System           ||");
-                    System.out.println("||      [1]   Add Employee                         ||");
-                    System.out.println("||      [2]   Edit Employee                        ||");
-                    System.out.println("||      [3]   Delete Employee                      ||");
-                    System.out.println("||      [4]   Show Employee                        ||");
-                    System.out.println("||      [5]   Search Employee                      ||");
-                    System.out.println("||      [6]   Sort Employee                        ||");
-                    System.out.println("||      [7]   Back                                 ||");
-                    System.out.println("||                                                 ||");
-                    System.out.println("=====================================================");
-                    empChoose = sc.nextInt();
-                    switch(empChoose)
+                    boolean check3 = true;
+                    int empChoose = 0;
+                    while (true)
                     {
-                        case 1:
+                        System.out.println("=====================================================");
+                        System.out.println("||                                                 ||");
+                        System.out.println("||            Employee Management System           ||");
+                        System.out.println("||      [1]   Add Employee                         ||");
+                        System.out.println("||      [2]   Edit Employee                        ||");
+                        System.out.println("||      [3]   Delete Employee                      ||");
+                        System.out.println("||      [4]   Show Employee                        ||");
+                        System.out.println("||      [5]   Search Employee                      ||");
+                        System.out.println("||      [6]   Sort Employee                        ||");
+                        System.out.println("||      [7]   Back                                 ||");
+                        System.out.println("||                                                 ||");
+                        System.out.println("=====================================================");
+                        empChoose = sc.nextInt();
+                        switch(empChoose)
+                        {
+                            case 1:
+                                empList.add(empManage.add());
+                                break;
+                            case 2:
+                                empManage.edit(empList);
+                                break;
+                            case 3:
+                                empManage.delete(empList);
+                                break;
+                            case 4:
+                                empManage.show(empList);
+                                break;
+                            case 5:
+                                empManage.search(empList);
+                                break;
+                            case 6:
+                                empManage.sort(empList);
+                                break;
+                            case 7:
+                                check3 = false;
+                                break;
+                            default:
+                                System.out.println("Please choose again!");
+                                break;
+                        }
+                        if(check3 == false)
+                        {
                             break;
-                        case 2:
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            break;
-                        case 5:
-                            break;
-                        case 6:
-                            break;
-                        case 7:
-                            break;
-                        default:
-                            System.out.println("Please choose again!");
-                            break;
+                        }
                     }
-                }
+                    break;
                 case 4:
-                int salChoose = 0;
-                while (true)
-                {
-                    System.out.println("=====================================================");
-                    System.out.println("||                                                 ||");
-                    System.out.println("||            Salary Management System             ||");
-                    System.out.println("||      [1]   Add Salary                           ||");
-                    System.out.println("||      [2]   Edit Salary                          ||");
-                    System.out.println("||      [3]   Delete Salary                        ||");
-                    System.out.println("||      [4]   Show Salary                          ||");
-                    System.out.println("||      [5]   Search Salary                        ||");
-                    System.out.println("||      [6]   Sort Salary                          ||");
-                    System.out.println("||      [7]   Back                                 ||");
-                    System.out.println("||                                                 ||");
-                    System.out.println("=====================================================");
-                    salChoose = sc.nextInt();
-                    switch(salChoose)
+                    boolean check4 = true;
+                    int salChoose = 0;
+                    while (true)
                     {
-                        case 1:
+                        System.out.println("=====================================================");
+                        System.out.println("||                                                 ||");
+                        System.out.println("||            Salary Management System             ||");
+                        System.out.println("||      [1]   Add Salary                           ||");
+                        System.out.println("||      [2]   Edit Salary                          ||");
+                        System.out.println("||      [3]   Delete Salary                        ||");
+                        System.out.println("||      [4]   Show Salary                          ||");
+                        System.out.println("||      [5]   Search Salary                        ||");
+                        System.out.println("||      [6]   Sort Salary                          ||");
+                        System.out.println("||      [7]   Back                                 ||");
+                        System.out.println("||                                                 ||");
+                        System.out.println("=====================================================");
+                        salChoose = sc.nextInt();
+                        switch(salChoose)
+                        {   
+                            case 1:
+                                salList.add(salManage.add());
+                                break;
+                            case 2:
+                                salManage.edit(salList);
+                                break;
+                            case 3:
+                                salManage.delete(salList);
+                                break;
+                            case 4:
+                                salManage.show(salList);
+                                break;
+                            case 5:
+                                salManage.search(salList);
+                                break;
+                            case 6:
+                                salManage.sort(salList);
+                                break;
+                            case 7:
+                                check4 = false;
+                                break;
+                            default:
+                                System.out.println("Please choose again!");
+                                break;
+                        }
+                        if(check4 == false)
+                        {
                             break;
-                        case 2:
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            break;
-                        case 5:
-                            break;
-                        case 6:
-                            break;
-                        case 7:
-                            break;
-                        default:
-                            System.out.println("Please choose again!");
-                            break;
+                        }
                     }
-                }
+                    break;      
             }
-
         }
     }
 }

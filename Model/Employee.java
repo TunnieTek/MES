@@ -69,5 +69,17 @@ public class Employee {
         this.pos = pos;
     }
 
+    public String getSalary() {
+        return String.valueOf(workingHours * pos.getPosSalary());
+    }
+
+    public String getTotalSalary() {
+        return String.valueOf(workingHours * pos.getPosSalary() + pos.getPosBonus());
+    }
+
+    public String getBonus() {
+        return String.valueOf(pos.getPosBonus());
+    }
+
     
 }

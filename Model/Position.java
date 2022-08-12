@@ -39,4 +39,8 @@ public class Position {
         this.posBonus = posBonus;
     }
 
+    public double getPosSalary() {
+        return 0;
+    }
+
 }
