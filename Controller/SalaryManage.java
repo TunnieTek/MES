@@ -8,12 +8,16 @@ public class SalaryManage implements Action<Salary> {
 
     @Override
     public Salary add() {
+        Salary salary = new Salary();
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Salary ID: ");
         String salaryID = sc.nextLine();
+        salary.setSalaryID(salaryID);
         System.out.println("Enter Employee: ");
         Employee emp = new EmployeeManage().add();
-        return new Salary(salaryID, emp, emp.getPos().getPosBonus() + emp.getDep().getDepSalary() * emp.getWorkingHours());
+        salary.setEmp(emp);
+        //Lỗi ở đây
+        return salary;
     }
 
     @Override
@@ -21,12 +25,13 @@ public class SalaryManage implements Action<Salary> {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Salary ID: ");
         String salaryID = sc.nextLine();
-        for (Salary s : list) {
-            if (s.getSalaryID().equals(salaryID)) {
-                System.out.println("Enter new Employee: ");
+        for(int i=0; i<list.size(); i++)
+        {
+            if(list.get(i).getSalaryID().equals(salaryID))
+            {
+                System.out.println("Enter Employee: ");
                 Employee emp = new EmployeeManage().add();
-                s.setEmp(emp);
-                s.setTotalSalary(emp);
+                list.get(i).setEmp(emp);
                 return true;
             }
         }
@@ -38,9 +43,11 @@ public class SalaryManage implements Action<Salary> {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Salary ID: ");
         String salaryID = sc.nextLine();
-        for (Salary s : list) {
-            if (s.getSalaryID().equals(salaryID)) {
-                list.remove(s);
+        for(int i=0; i<list.size(); i++)
+        {
+            if(list.get(i).getSalaryID().equals(salaryID))
+            {
+                list.remove(i);
                 return true;
             }
         }
@@ -49,8 +56,13 @@ public class SalaryManage implements Action<Salary> {
 
     @Override
     public void show(ArrayList<Salary> list) {
-        for (Salary s : list) {
-            System.out.println(s);
+        for(int i=0; i<list.size(); i++)
+        {
+            System.out.println("Salary ID: " + list.get(i).getSalaryID());
+            System.out.println("Employee: " + list.get(i).getEmp().getEmpName());
+            // System.out.println("Salary: " + list.get(i).getSalary());
+            // System.out.println("Bonus: " + list.get(i).getBonus());
+            // System.out.println("Total Salary: " + list.get(i).getTotalSalary());
         }
     }
 
@@ -59,9 +71,15 @@ public class SalaryManage implements Action<Salary> {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Salary ID: ");
         String salaryID = sc.nextLine();
-        for (Salary s : list) {
-            if (s.getSalaryID().equals(salaryID)) {
-                System.out.println(s);
+        for(int i=0; i<list.size(); i++)
+        {
+            if(list.get(i).getSalaryID().equals(salaryID))
+            {
+                System.out.println("Salary ID: " + list.get(i).getSalaryID());
+                System.out.println("Employee: " + list.get(i).getEmp().getEmpName());
+                // System.out.println("Salary: " + list.get(i).getSalary());
+                // System.out.println("Bonus: " + list.get(i).getBonus());
+                // System.out.println("Total Salary: " + list.get(i).getTotalSalary());
             }
         }
     }
