@@ -24,14 +24,10 @@ public class EmployeeManage implements Action<Employee>
         System.out.println("Enter Employee Working Hours: ");
         Double workingHours = sc.nextDouble();
         emp.setWorkingHours(workingHours);
-        System.out.println("Choose Employee Department: ");
-        // ===================================================DDANG FIX (TUAN)
-        
-        // ===================================================
-        System.out.println("Choose Employee Position: ");
-        // ===================================================DANG FIX (TUAN)
-
-        // ===================================================
+        System.out.println("Choose Department ID: ");
+        //LỖI VCH
+        System.out.println("Choose Position ID: ");
+        //LỖI LIÊN KẾT -- ĐI NGỦ ĐÃ MAI FIX 
         return emp;
     }
 
@@ -134,5 +130,4 @@ public class EmployeeManage implements Action<Employee>
     
 
 }
-
 
